@@ -1,0 +1,45 @@
+.blue-purple-gradient {
+  background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
+}
+.btn {
+  background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
+  border-radius: 5rem;
+  padding:1.2rem;
+  color:white;
+  width:8rem;
+}
+.padding{
+  padding-top: 5rem;
+  padding-left:5rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+h1{
+color:white;
+}
+
+
+.logintitle{
+padding-top:50px;
+padding-left:5rem;
+margin-right: auto;
+margin-left: auto;
+}
+
+.fa{
+color:white;
+padding:0.2rem;
+}
+
+.form-control{
+border-radius:5rem;
+}
+
+
+.input-group-text{
+  border-radius:5rem;
+  background-color:white;
+}
+
+
