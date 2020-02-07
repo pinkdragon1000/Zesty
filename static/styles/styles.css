@@ -1,15 +1,41 @@
-.blue-purple-gradient {
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.green-blue-gradient {
   background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
+  padding:1.7rem;
 }
 .btn {
   background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
   border-radius: 5rem;
   padding:1.2rem;
   color:white;
-  width:8rem;
+  justify-content:center;
+  text-transform:uppercase;
+  text-align:center;
 }
+
+.btn:hover {
+  color: white;
+  box-shadow: 0rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.main{
+  background-color: #FFFFFF;
+  position: relative;
+}
+h4{
+  line-height: 1.4em;
+}
+
 .padding{
-  padding-top: 5rem;
+  padding-top: 0.5rem;
   padding-left:5rem;
   margin-right: auto;
   margin-left: auto;
@@ -19,12 +45,34 @@ h1{
 color:white;
 }
 
+.recipeName{
+background-color:transparent; 
+border-color:transparent; 
+font-size:1.3rem;
+width:25rem;
+height:5rem;
+color:white;
+}
+.recipeName::placeholder{
+  color:white;
+}
+
+.recipeName:focus{
+  border-color:white;
+  border:0.0625rem solid;
+}
 
 .logintitle{
-padding-top:50px;
+padding-top:3.125rem;
 padding-left:5rem;
 margin-right: auto;
 margin-left: auto;
+text-align:center;
+vertical-align:middle;
+}
+
+.white-text{
+  color:white;
 }
 
 .fa{
@@ -34,12 +82,288 @@ padding:0.2rem;
 
 .form-control{
 border-radius:5rem;
+font-size:1.2rem;
 }
-
 
 .input-group-text{
   border-radius:5rem;
   background-color:white;
+  line-height: 3rem;
+}
+
+label{
+  font-size:1rem;
+  line-height:1.5rem;
+}
+
+.recipeCard{
+  background-color: #C4C4C4;
+  color: white;
+  padding: 6rem 8rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom:1rem;
+  margin-right:1rem;
+}
+
+.recipeCard:hover {
+  color: white;
+  box-shadow: 0rem 0.125rem 5px 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.recipeBox{
+  text-align:center;
+}
+
+.content{
+  margin:1rem 5rem;
+}
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.fa.fa-upload{
+  color:black;
+}
+
+nav {
+  display: block;
+  font-size: 62.5%;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+/*Nav Styles*/
+@media (min-width: 768px) {
+.nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 }
 
 
+.nav > li {
+  position: relative;
+  display: block;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+
+@media (min-width: 768px) {
+  .navbar-header {
+    float: left;
+  }
+}
+
+.navbar-collapse {
+  max-height: 340px;
+  padding-right: 15px;
+  padding-left: 15px;
+  overflow-x: visible;
+  border-top: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  -webkit-overflow-scrolling: touch;
+}
+
+.navbar-collapse:before,
+.navbar-collapse:after {
+  display: table;
+  content: " ";
+}
+
+.navbar-collapse:after {
+  clear: both;
+}
+
+.navbar-collapse:before,
+.navbar-collapse:after {
+  display: table;
+  content: " ";
+}
+
+.navbar-collapse:after {
+  clear: both;
+}
+
+.navbar-collapse.in {
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .navbar-collapse.in {
+    overflow-y: auto;
+  }
+  .navbar-collapse .navbar-nav.navbar-left:first-child {
+    margin-left: -15px;
+  }
+  .navbar-collapse .navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+  }
+  .navbar-collapse .navbar-text:last-child {
+    margin-right: 0;
+  }
+}
+
+.navbar-brand {
+  float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .navbar-nav > li {
+    float: left;
+  }
+  .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-right {
+    float: right !important;
+  }
+}
+
+
+.navbar-nav > li > .dropdown-menu {
+  margin-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.navbar-nav.pull-right > li > .dropdown-menu,
+.navbar-nav > li > .dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+
+.navbar-text {
+  float: left;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+}
+.navbar{
+  border: 0 none;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  font-size: 14px;
+}
+.navbar-default {
+  background-color: #D9D9D9;
+  
+}
+.navbar .navbar-brand {
+  font-weight: 600;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  font-size: 20px;
+}
+.navbar-nav > li > a {
+  margin: 6px 3px;
+  padding: 6px 7px;
+  text-align: center;
+  min-width: 70px;
+}
+
+.navbar-brand{
+  padding: 20px 15px;
+}
+.navbar .navbar-nav [class^="pe"]{
+  font-size: 32px;
+  position: relative;
+}
+.navbar .navbar-nav p{
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+.navbar-transparent{
+  padding-top: 15px;
+  background-color: rgba(0,0,0,.0);
+}
+.navbar-transparent .navbar-brand, [class*="navbar-ct"] .navbar-brand{
+  color: #FFFFFF;
+  opacity: 0.95;
+}
+.navbar-transparent .navbar-brand:hover, .navbar-transparent .navbar-brand:focus {
+  background-color: rgba(0, 0, 0, 0);
+  color: #5E5E5E;
+}
+
+.navbar-transparent .navbar-nav > li > a, [class*="navbar-ct"] .navbar-nav > li > a{
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  text-align: center;
+}
+
+.navbar-transparent .navbar-nav > .active > a, .navbar-transparent .navbar-nav > .active > a:hover, .navbar-transparent .navbar-nav > .active > a:focus, .navbar-transparent .navbar-nav > li > a:hover, .navbar-transparent .navbar-nav > li > a:focus, [class*="navbar-ct"] .navbar-nav > .active > a, [class*="navbar-ct"] .navbar-nav > .active > a:hover, [class*="navbar-ct"] .navbar-nav > .active > a:focus, [class*="navbar-ct"] .navbar-nav > li > a:hover, [class*="navbar-ct"] .navbar-nav > li > a:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #FFFFFF;
+  opacity: 1;
+}
+.navbar:not(.navbar-transparent).navbar-ct-green {
+  background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
+  padding:1rem;
+  }

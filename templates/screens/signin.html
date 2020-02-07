@@ -1,34 +1,11 @@
-<html>
+{% extends './common/loginRegisterTemplate.html' %}
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../static/styles/styles.css" />
-</head>
+{% block content %}
 
-<body>
-  <div class="row blue-purple-gradient">
-
-    <div>
-
-
-      <h1 class="logintitle"> <a href='' target="blank_" class="fa fa-cutlery fa-2x"></a>Recipe App</h1>
-
-    </div>
-  </div>
-
-
-  <div class="col-md-6 padding">
-    <form onSubmit={this.submitHandler}>
+    <form>
       <div class="mb-3">
-        <h4 class="black-text">
-          Sign In
-        </h4>
+        <h3 class="black-text">Sign In</h3>
 
-        <br>
         <label class="black-text">Email</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -39,7 +16,7 @@
           <input type="email" class="form-control" name="email" placeholder="Type in your email" required />
         </div>
       </div>
-      <br>
+ 
       <div class="mb-3">
         <label class="black-text"> Password</label>
         <div class="input-group">
@@ -51,14 +28,12 @@
           <input type="password" class="form-control" name="password" placeholder="Type in your password" required />
         </div>
       </div>
-      <br>
-
+      
       <a class="btn white-text" type="submit" href="/yourRecipes">Sign In</a>
       <br>
       <a class type="submit" href="/signup">Don't have an account?  Sign up.</a>
 
     </form>
-  </div>
-</body>
 
-</html>
+    {% endblock %}
+  

@@ -6,6 +6,8 @@
     <br>
     conda install -c anaconda flask	
     <br>
-     set FLASK_APP=form_demo.py
+     set FLASK_APP=routes.py
      <br>
+    set FLASK_ENV=development
+    <br>
      flask run
