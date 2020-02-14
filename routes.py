@@ -12,19 +12,19 @@ def favicon():
 
 @app.route('/')
 def login():
-    return render_template("signin.html")
+    return render_template("screens/signin.html")
 
 @app.route('/signup')
 def signup():
-    return render_template("signup.html")
+    return render_template("screens/signup.html")
 
 @app.route('/yourRecipes', methods=['GET'])
 def youRecipes():
     return render_template("screens/yourrecipes.html")
 
-@app.route('/recipe', methods=['GET'])
+@app.route('/viewRecipe', methods=['GET'])
 def recipe():
-    return render_template("screens/recipe.html")
+    return render_template("screens/viewrecipe.html")
 
 @app.route('/addRecipe', methods=['GET'])
 def addRecipe():
@@ -33,6 +33,10 @@ def addRecipe():
 @app.route('/editRecipe', methods=['GET'])
 def editRecipe():
     return render_template("screens/editRecipe.html")
+
+@app.route('/groceries', methods=['GET'])
+def groceries():
+    return render_template("screens/groceries.html")
     
 @app.route('/profile', methods=['GET'])
 def profile():

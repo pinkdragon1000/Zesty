@@ -2,28 +2,35 @@
 
 {% block content %}
 
-  <h3 class="black-text">
-   Your Recipes
-  </h3>
+  <h3 class="black-text">Your Recipes</h3>
 
   <p>Click on a recipe to view it.</p>
 
+  <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon">
+          <a class="fa fa-search"></a>
+        </span>
+      </div>
+      <input type="search" class="form-control" name="search" placeholder="Search for a recipe"/>
+    </div>
+
   <div class="recipeBox">
-  <a class="recipeCard" href="/recipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
 
-  <a class="recipeCard" href="/recipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
 
-  <a class="recipeCard" href="/recipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
 
-  <a class="recipeCard" href="/recipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
 
-  <a class="recipeCard" href="/recipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
 
-  <a class="recipeCard" href="/recipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
 
-  <a class="recipeCard" href="/recipe">Recipe</a>
-  <a class="recipeCard" href="/recipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
 
-  <a class="recipeCard" href="/recipe">Recipe</a>
+  <a class="recipeCard" href="/viewRecipe">Recipe</a>
 </div>
 {% endblock %}

@@ -2,27 +2,5 @@
 
 {% block content %}
     <a class="btn white-text" style="float:right" type="submit" href="">Save Recipe</a>
-    <br><br>
-
-    <div class="col-md-6 padding">
-    <label>Upload an Image</label>
-    <input type="file" name="pic" accept="image/*">
-    <label>Recipe Description</label>
-    <br>
-    <input type="text" class="form-control" placeholder="Type in your recipe description" required />
-    <label>Methods</label>
-    <textarea rows="20" cols="70" placeholder="Please enter your recipe methods/steps here"></textarea>
-    </div>
-   
-    
-    <div class="col-md-3 padding">
-    <label>Ingredients</label>
-    <br>
-    1.<br>
-    2.<br>
-    3.<br>
-    4.<br>
-    </div>
-    </div>
-    </div>
+    {% include './common/editAddRecipeTemplate.html' %}
 {% endblock %}
