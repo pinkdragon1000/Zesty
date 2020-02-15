@@ -1,11 +1,18 @@
 #!/usr/bin/python3
-from flask import Flask
-from flask import request,jsonify
-from flask import render_template
-from flask import send_from_directory
+from flask import Flask, request,jsonify, render_template, send_from_directory
 import os
 
+#from flask_mysqldb import MySQL
+
 app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'zesty_user'
+app.config['MYSQL_PASSWORD'] = 'Z3$tyU$3r54'
+app.config['MYSQL_DB'] = 'Zesty'
+mysql = MySQL(app)
+
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/styles'),'favicon.ico',mimetype='image/vnd.microsoft.icon')
@@ -13,10 +20,20 @@ def favicon():
 @app.route('/')
 def login():
     return render_template("screens/signin.html")
+    
+
+@app.route('/users') 
+def users()  
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT * FROM Zesty.Users''')
+    rv = cur.fetchall()
+    return str(rv)
+    
 
 @app.route('/signup')
 def signup():
     return render_template("screens/signup.html")
+
 
 @app.route('/yourRecipes', methods=['GET'])
 def youRecipes():
