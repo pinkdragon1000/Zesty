@@ -1,47 +1,46 @@
+{% extends './common/loginRegisterTemplate.html' %}
 
-  {% extends './common/loginRegisterTemplate.html' %}
-
-  {% block content %}
-  
-  <form>
-    <div class="mb-3">
-      <h3 class="black-text">Sign Up </h3>
-
-      <label class="black-text">Full Name</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon">
-            <a class="fa fa-user"></a>
-          </span>
-        </div>
-        <input type="name" class="form-control" name="name" placeholder="Type in your name" required />
+{% block content %}
+<div class="mb-3">
+    <h3 class="black-text">Sign Up </h3>
+    <form action="{{ url_for('signup') }}" method="post" >
+    <label class="black-text">Full Name</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon">
+          <a class="fa fa-user"></a>
+        </span>
       </div>
-
-      <label class="black-text">Email</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon">
-            <a class="fa fa-envelope"></a>
-          </span>
-        </div>
-        <input type="email" class="form-control" name="email" placeholder="Type in your email" required />
-      </div>
+      <input type="fullName" class="form-control" name="fullName" placeholder="Type in your full name" required />
     </div>
 
-    <div class="mb-3">
-      <label class="black-text"> Password</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon">
-            <a class="fa fa-lock"></a>
-          </span>
-        </div>
-        <input type="password" class="form-control" name="password" placeholder="Type in your password" required />
+    <label class="black-text">Email</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon">
+          <a class="fa fa-envelope"></a>
+        </span>
       </div>
+      <input type="email" class="form-control" name="email" placeholder="Type in your email" required />
     </div>
+  </div>
 
-    <a class="btn white-text" type="submit" href="/yourRecipes">Sign Up</a>
-    <br>
-    <a class type="submit" href="/">Already have an account?  Sign in.</a>
-  </form>
-  {% endblock %}
+  <div class="mb-3">
+    <label class="black-text"> Password</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon">
+          <a class="fa fa-lock"></a>
+        </span>
+      </div>
+      <input type="password" class="form-control" name="password" placeholder="Type in your password" required />
+    </div>
+  </div>
+  <input type="submit" class="btn white-text" value="Sign Up">
+                <br>
+                <a class type="submit" href="/">Already have an account?  Sign in.</a>
+</form>
+</div>
+
+	
+{% endblock %}

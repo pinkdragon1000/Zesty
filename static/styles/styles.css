@@ -20,6 +20,10 @@ body {
   text-align:center;
   width:10rem;
   height:3rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
 }
 
 .btn.logout{
@@ -51,14 +55,25 @@ h1{
 color:white;
 }
 
+
 .recipeName{
-background-color:transparent; 
-border-color:transparent; 
-font-size:1.3rem;
-width:25rem;
-height:5rem;
-color:white;
-}
+  background-color:#ffffff2e; 
+  border-color:transparent; 
+  font-size:2rem;
+  width:27rem;
+  height:3.5rem;
+  color:white;
+  align-items:center;
+  position:absolute;
+  top:1.9rem;
+  left:6rem;
+  
+  }
+
+.recipeName.uneditable{
+  background-color:transparent;
+  }
+
 .recipeName::placeholder{
   color:white;
 }
@@ -87,8 +102,8 @@ padding:0.2rem;
 }
 
 .form-control{
-border-radius:3rem;
-font-size:1.2rem;
+border-radius:2rem;
+font-size:1rem;
 }
 
 .input-group-text{
@@ -97,24 +112,23 @@ font-size:1.2rem;
   line-height: 3rem;
 }
 
+
 textarea{
   border-radius:1rem;
   padding-left: 1.5rem;
   padding-right: 0.5rem;
+  resize:none;
 }
-
 
 label{
   font-size:1rem;
   line-height:1.5rem;
 }
 
-
 .recipeCard{
   background-color: #C4C4C4;
   color: white;
   padding: 6rem 8rem;
-  text-align: center;
   text-decoration: none;
   display: inline-block;
   margin-bottom:1rem;
@@ -127,9 +141,16 @@ label{
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.recipeBox{
-  text-align:center;
+.msg {
+  padding: 8px 35px 8px 30px;
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 2px solid #EED3D7;
+  border-radius: 4px;
+  text-shadow: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
 }
+
 
 .content{
   margin:1rem 5rem;
@@ -137,13 +158,22 @@ label{
 input[type="file"] {
   display: none;
 }
-.custom-file-upload {
-  border: 1px solid #ccc;
+.fileUpload {
+  border: 1px solid #C4C4C4;
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+  border-radius:3rem;
+}
+
+.fileUpload:hover {
+  box-shadow: 0rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .fa.fa-upload{
+  color:black;
+}
+.fa.fa-upload:hover{
   color:black;
 }
 
@@ -153,11 +183,13 @@ input[type="file"] {
 
 nav {
   display: block;
-  font-size: 62.5%;
 }
 
 a {
   text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 p {
@@ -290,6 +322,9 @@ p {
   .navbar-nav > li > a {
     padding-top: 15px;
     padding-bottom: 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
 }
 
@@ -326,8 +361,6 @@ p {
 }
 .navbar{
   border: 0 none;
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
   font-size: 14px;
 }
 .navbar-default {
@@ -345,6 +378,9 @@ p {
   padding: 6px 7px;
   text-align: center;
   min-width: 70px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .navbar-brand{

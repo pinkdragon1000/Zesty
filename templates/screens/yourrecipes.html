@@ -1,11 +1,13 @@
 {% extends './common/recipeBasicNavTemplate.html' %}
 
 {% block content %}
+<div class="row">
+<div class="col-md-8">
+  <h3 class="black-text">{{name}}'s Recipes</h3>
 
-  <h3 class="black-text">Your Recipes</h3>
-
-  <p>Click on a recipe to view it.</p>
-
+  <p>Click on a recipe to view it.  Add a recipe by navigating to "Add Recipe" in the navigation bar.</p>
+</div>
+  <div class="col-md-4">
   <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon">
@@ -14,23 +16,12 @@
       </div>
       <input type="search" class="form-control" name="search" placeholder="Search for a recipe"/>
     </div>
-
+  </div>
+</div>
   <div class="recipeBox">
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
-
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
-
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
-
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
-
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
-
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
-
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
-
-  <a class="recipeCard" href="/viewRecipe">Recipe</a>
+  
+   {% for recipe in recipeCard %}
+  <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=recipe[0] )}}"> {{ recipe[1] }}</a>
+  {% endfor %}
 </div>
 {% endblock %}
