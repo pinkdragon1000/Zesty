@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link href="../static/styles/styles.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -14,57 +14,28 @@
 </head>
 
 <body>
+  <script>
+    function deleteConfirm() {
+      confirm("Are you sure you want to delete the recipe {{recipeName}}?");
+    }
+    </script>
 
-  <div>
-    <nav class="navbar navbar-ct-green" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <a href='yourRecipes' class="fa fa-cutlery fa-4x"></a>
-    
-          <input type="text" class="recipeName" placeholder="Type in a recipe name here..." value="{{recipeName}}">
-        
-        </div>
+  <form method='POST' id="addEditRecipeForm" action="{{formAction}}" enctype="multipart/form-data">
+    <div>
+      {% include './common/navbarTemplate.html' %}
+      {% block title %}
+      <input type="text" class="recipeName" name="recipeName" placeholder="Type in a recipe name here..."
+        value="{{recipeName}}">
+      {% endblock %}
+    </div>
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+    <a class="circular-help-btn white-text fa fa-question fa-2x" type="submit" style="float:right;margin-right:1rem;"
+      data-toggle="tooltip" data-placement="bottom" title="Help"
+      href="{{url_for('editRecipe', recipeID=recipeID )}}"></a>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="/yourRecipes">
-                <i class="fa fa-th fa-2x"></i>
-                <p>Recipes</p>
-              </a>
-            </li>
-            <li>
-              <a href="/addRecipe">
-                <i class="fa fa-plus-circle fa-2x">
-
-                </i>
-                <p>Add Recipe</p>
-              </a>
-            </li>
-            <li>
-                <a href="/groceries">
-                  <i class="fa fa-shopping-bag fa-2x"></i>
-                  <p>Groceries</p>
-                </a>
-              </li>
-            <li>
-              <a href="/profile">
-                <i class="fa fa-user fa-2x"></i>
-                <p>Profile</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-  </div><!--  end navbar -->
-  <div class="content">
-    {% block content %}{% endblock %}
-  </div>
+  </form>
 </body>
-
 
 </html>

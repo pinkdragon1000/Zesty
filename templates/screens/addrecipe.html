@@ -1,6 +1,10 @@
 {% extends './common/recipeTitleNavTemplate.html' %}
 
 {% block content %}
-    <a class="btn white-text" style="float:right" type="submit" href="">Save Recipe</a>
-    {% include './common/editAddRecipeTemplate.html' %}
+<a class="btn white-text" style="float:right" type="submit" onclick="javascript: addEditRecipeForm.submit();return false;" href="">Create Recipe</a>
+<a class="circular-btn delete white-text fa fa-trash fa-2x" type="submit" style="float:right" data-toggle="tooltip"
+data-placement="bottom" title="Delete Recipe" onclick="javascript: deleteConfirm();return false;"></a>
+
+{% include './common/editAddRecipeTemplate.html' %}
+
 {% endblock %}

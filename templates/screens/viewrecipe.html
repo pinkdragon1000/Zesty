@@ -3,39 +3,45 @@
 {% block content %}
 
 <div>
-        <a class="btn white-text" type="submit" style="float:right" href="{{url_for('editRecipe', recipeID=recipeID )}}">Edit Recipe</a>
-        <br><br>
-<div class="row">
-        <div class="col-md-9 padding">
-        <h5><span class="badge badge-pill badge-secondary">{{recipeTag}}</span></h5>
-    <h5>
-    Recipe Description
-    </h5>
-    <p>
-    {{recipeDescription}}
-    </p>
+    <div style="border-radius:5rem; border: black;">
+        <a class="circular-btn white-text fa fa-cart-plus fa-2x" type="submit" style="float:right" data-toggle="tooltip"
+            data-placement="bottom" title="Add to Grocery List"
+            href="{{url_for('editRecipe', recipeID=recipeID )}}"></a>
+        <a class="circular-btn white-text fa fa-edit fa-2x" type="submit" style="float:right" data-toggle="tooltip"
+            data-placement="bottom" title="Edit Recipe" href="{{url_for('editRecipe', recipeID=recipeID )}}"></a>
 
-    <h5>
-    Preparation Time
-    </h5>
-    <p>
-    {{preparationTime}}
-    </p>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-md-6 padding">
+            <h5><span class="badge badge-pill badge-secondary">{{recipeTag}}</span></h5>
+            <h5>
+                Recipe Description
+            </h5>
+            <p>
+                {{recipeDescription}}
+            </p>
 
-    <h5 class="recipeCard">Recipe Image</h5>
-    
-    <h5>
-        Methods:
-    </h5>
-    <p>
-    {{recipeMethods}}
-    </p>
-</div>    
-<div class="col-md-3">
-    <h5>Ingredients</h5>
-    <p></p>
-  </div>
+            <h5>
+                Preparation Time
+            </h5>
+            <p>
+                {{preparationTime}}
+            </p>
+
+            <h5 class="recipeCard">Recipe Image</h5>
+
+            <h5>
+                Methods:
+            </h5>
+            <p>
+                {{recipeMethods|safe}}
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h5>Ingredients</h5>
+            <p></p>
+        </div>
     </div>
-    </div>
-    {% endblock %}
-   
+</div>
+{% endblock %}

@@ -1,18 +1,31 @@
 <br>
 
-<form method="post">
-<label for="file-upload" class="fileUpload">
-        <i class="fa fa-upload"></i> UPLOAD A RECIPE IMAGE
-    </label>
-    <input id="file-upload" type="file"/>
-    <br>
-<label>Recipe Description</label>
-<input type="text" class="form-control" placeholder="Type in your recipe description" value="{{recipeDescription}}" required />
-<label>Preparation Time</label>
-<input type="text" class="form-control" placeholder="Type in the preparation time for your recipe" value="{{preparationTime}}" />
-<label>Yield</label>
-<input type="text" class="form-control" placeholder="Type in how many people this recipe is good for" value="{{recipeYield}}"/>
-<label>Methods</label>
-<textarea class="form-control" rows="13" cols="60" placeholder="Please enter your recipe methods/steps here..." >{{recipeMethods}}</textarea>
-<label>Ingredients</label>
-</form>
+
+<div class="row">
+    <div class="col-md-7 padding">
+       
+        <label for="file-upload" class="fileUpload">
+            <i class="fa fa-upload"></i> UPLOAD A RECIPE IMAGE
+        </label>
+        <input id="recipeImage" type="file" name="recipeImage" />
+        <br>
+        <label>Recipe Description</label>
+        <input type="text" class="form-control" name="recipeDescription" placeholder="Type in your recipe description" value="{{recipeDescription}}" required />
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches" name="recipePermission" {{recipePermission}}>
+            <label class="custom-control-label" for="customSwitches">Make Recipe Public</label>
+          </div>
+        <label>Preparation Time</label>
+        <input type="text" class="form-control" name="preparationTime" placeholder="Type in the preparation time for your recipe" value="{{preparationTime}}" />
+        <label>Recipe Tag (Ex. Lunch, Dinner, Breakfast)</label>
+        <input type="text" class="form-control" name="recipeTag" placeholder="Enter in a tag for your recipe" value="{{recipeTag}}" />
+        <label>Yield</label>
+        <input type="text" class="form-control" name="recipeYield" placeholder="Type in how many people this recipe is good for" value="{{recipeYield}}" />
+        <label>Methods</label>
+        <textarea class="form-control" name="recipeMethods" rows="13" cols="60" placeholder="Please enter your recipe methods/steps here...">{{recipeMethods}}</textarea>
+    </div>
+    <div class="col-md-5">
+        <label>Ingredients</label>
+
+    </div>
+</div>

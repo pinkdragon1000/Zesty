@@ -1,0 +1,50 @@
+<nav class="navbar navbar-ct-green" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a href='yourRecipes' class="fa fa-cutlery fa-3x"></a>
+
+
+      {% block content %}{% endblock %}
+    </div>
+
+    <!--Navbar -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/yourRecipes">
+            <i class="fa fa-th"></i>
+            <p>Recipes</p>
+          </a>
+        </li>
+        <li>
+          <a href="/addRecipe">
+            <i class="fa fa-plus-circle">
+
+            </i>
+            <p>Add Recipe</p>
+          </a>
+        </li>
+        <li>
+          <a href="/groceries">
+            <i class="fa fa-shopping-bag"></i>
+            <p>Groceries</p>
+          </a>
+        </li>
+        <li>
+          <a href="/profile">
+            <i class="fa fa-user"></i>
+            <p>Profile</p>
+          </a>
+        </li>
+        <div style="width:3rem; border-right:1px solid white;"></div>
+        <li>
+          <a href="/">
+            <i class="fa fa-power-off"></i>
+            <p class>Logout</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

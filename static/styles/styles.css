@@ -4,12 +4,14 @@ html {
 
 body {
   margin: 0;
+  background-color:#EBF3F6
 }
 
 .green-blue-gradient {
   background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
   padding:1.7rem;
 }
+
 .btn {
   background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
   border-radius: 5rem;
@@ -26,14 +28,45 @@ body {
   
 }
 
-.btn.logout{
-  background: linear-gradient(45deg, #FF8B59, #AD0000);
-}
-
 .btn:hover {
   color: white;
   box-shadow: 0rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12);
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.circular-btn {
+  background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
+  border-radius: 5rem;
+  padding:0.7rem;
+  color:white;
+  justify-content:center;
+  text-transform:uppercase;
+  text-align:center;
+  width:3rem;
+  height:3rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-left:1rem;
+}
+
+.circular-help-btn {
+  background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  justify-content:center;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  box-shadow: 2px 2px 3px #999;
+}
+
+.circular-btn.delete{
+  background: linear-gradient(45deg, #dc3545, rgb(255, 150, 145));
+  margin-right:1rem;
 }
 
 .main{
@@ -59,13 +92,13 @@ color:white;
 .recipeName{
   background-color:#ffffff2e; 
   border-color:transparent; 
-  font-size:2rem;
+  font-size:1.5rem;
   width:27rem;
   height:3.5rem;
   color:white;
   align-items:center;
   position:absolute;
-  top:1.9rem;
+  top:0.5rem;
   left:6rem;
   
   }
@@ -96,9 +129,14 @@ vertical-align:middle;
   color:white;
 }
 
+
 .fa{
 color:white;
 padding:0.2rem;
+}
+
+.fa:hover{
+  text-decoration:none;
 }
 
 .form-control{
@@ -110,8 +148,13 @@ font-size:1rem;
   border-radius:5rem;
   background-color:white;
   line-height: 3rem;
+  padding:0rem;
 }
 
+.custom-control-input:checked~.custom-control-label::before{
+  background-color: rgb(0, 188, 174);
+  border-color: rgb(0, 188, 174);
+}
 
 textarea{
   border-radius:1rem;
@@ -125,20 +168,40 @@ label{
   line-height:1.5rem;
 }
 
+.recipeBox{
+  margin-top:2rem;
+  text-align:center;
+}
+
 .recipeCard{
   background-color: #C4C4C4;
   color: white;
-  padding: 6rem 8rem;
+  padding: 6rem;
   text-decoration: none;
   display: inline-block;
   margin-bottom:1rem;
   margin-right:1rem;
+  min-width:22rem;
+  min-height: 10rem;
+  text-align:center;
+  border-radius:1rem 5rem;
+  background-size: 400px;
+  z-index:1;
 }
 
 .recipeCard:hover {
   color: white;
   box-shadow: 0rem 0.125rem 5px 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12);
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.recipeText {
+  position: inherit;
+  background: linear-gradient(45deg, rgba(0, 188, 174, 0.75), rgb(0, 143, 173, 0.75));
+  color: white;
+  z-index:4;
+  margin-top:6rem;
+  padding:0.7rem;
 }
 
 .msg {
@@ -153,8 +216,14 @@ label{
 
 
 .content{
-  margin:1rem 5rem;
+  margin:1rem 2rem;
+  padding: 2rem;
+  border-radius: 5rem;
+  background-color:white;
+  min-height:30rem;
 }
+
+/*
 input[type="file"] {
   display: none;
 }
@@ -165,6 +234,7 @@ input[type="file"] {
   cursor: pointer;
   border-radius:3rem;
 }
+
 
 .fileUpload:hover {
   box-shadow: 0rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12);
@@ -177,8 +247,17 @@ input[type="file"] {
   color:black;
 }
 
+*/
 .fa:hover{
   color:white;
+}
+
+.fa.fa-cart-plus{
+  padding:0.5rem;
+}
+
+.fa.fa-edit{
+  padding:0.5rem;
 }
 
 nav {
@@ -361,7 +440,6 @@ p {
 }
 .navbar{
   border: 0 none;
-  font-size: 14px;
 }
 .navbar-default {
   background-color: #D9D9D9;
@@ -422,5 +500,5 @@ p {
 }
 .navbar:not(.navbar-transparent).navbar-ct-green {
   background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
-  padding:1rem;
+  padding:0rem
   }

@@ -17,17 +17,13 @@
     </div>
   </div>
 </div>
-
-
 <div class="recipeBox">
 
-  {% for recipe in recipeCard %}
+  {% for publicRecipe in publicRecipeCard %}
   
-
-  <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=recipe[0] )}}" style= 'background-image: url({{recipe[2]}});'>
-    <span class="recipeText">{{ recipe[1] }}</span>
+  <a class="publicRecipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=publicRecipe[0] )}}">
+    <span class="recipeText">{{ publicRecipe[1] }}</span>
   </a>
-
   {% endfor %}
 </div>
 {% endblock %}
