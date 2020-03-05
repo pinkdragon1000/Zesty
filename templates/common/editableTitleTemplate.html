@@ -1,0 +1,27 @@
+<!--Editable Title Template-->
+<!doctype html>
+<html lang="en">
+{% include './common/headTemplate.html'%}
+{% block head %}{% endblock %}
+
+<body>
+
+  <form method='POST' id="addEditRecipeForm" action="{{formAction}}" enctype="multipart/form-data">
+    <div>
+      {% include './common/navbarTemplate.html' %}
+      {% block title %}
+      <input type="text" class="recipeName" name="recipeName" placeholder="Type in a recipe name here..."
+        value="{{recipeName}}">
+      {% endblock %}
+    </div>
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+
+  </form>
+  {% include './common/modalHelpTemplate.html'%}
+  {% block modal %}{% endblock %}
+
+</body>
+
+</html>

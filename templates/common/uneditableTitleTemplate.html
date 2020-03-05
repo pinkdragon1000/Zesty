@@ -1,0 +1,25 @@
+<!--Uneditable Title Template-->
+<!doctype html>
+<html lang="en">
+
+{% include './common/headTemplate.html'%}
+{% block head %}{% endblock %}
+
+<body>
+  <div>
+    {% include './common/navbarTemplate.html' %}
+    {% block title %}
+    <input type="text" class="recipeName uneditable" placeholder="Type in a recipe name here..." value="{{recipeName}}"
+      disabled>
+    {% endblock %}
+  </div>
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  {% include './common/modalHelpTemplate.html'%}
+  {% block modal %}{% endblock %}
+
+</body>
+
+</html>

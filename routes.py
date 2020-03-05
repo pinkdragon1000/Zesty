@@ -1,3 +1,6 @@
+
+
+
 #!/usr/bin/python3
 from flask import Flask, request,jsonify, render_template, send_from_directory,session,redirect,url_for
 import os
@@ -95,11 +98,18 @@ def signup():
 def yourRecipes():
     cur = mysql.connection.cursor()
     user=session['userID']
+    search=""
+    if request.method=='POST':
+        search=request.form.get('search')
     cur.execute('SELECT fullName FROM Zesty.Users where userID=%s', [user])
     name = cur.fetchone()
-    cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where userID=%s', [user])
+    if search != "":
+        searchQuery = '%' + search + '%'
+        cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where userID=%s and recipeName like %s', [user,searchQuery])
+    else:
+        cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where userID=%s', [user])
     recipes=cur.fetchall()
-    return render_template("screens/yourrecipes.html", recipeCard=recipes, recipeName=name[0]+"'s Recipes")
+    return render_template("screens/yourrecipes.html", recipeCard=recipes, recipeName=name[0]+"'s Recipes", search=search)
 
 @app.route('/publicRecipes', methods=['GET', 'POST'])
 def publicRecipes():
@@ -114,13 +124,13 @@ def viewRecipe():
     cur = mysql.connection.cursor()
     user=session['userID']
     recipeID = request.args.get('recipeID')
-    cur.execute('SELECT recipeName, recipeDescription, preparationTime, yield, methods, recipeTag FROM Zesty.RecipeInfo where userID=%s and recipeID=%s', [user, recipeID])
+    cur.execute('SELECT recipeName, recipeDescription, preparationTime, yield, methods, recipeTag, recipeImage FROM Zesty.RecipeInfo where userID=%s and recipeID=%s', [user, recipeID])
     recipeInfo=cur.fetchone()
     if(recipeInfo[4] !=None):
         methodSplit=recipeInfo[4].replace('\n', '<br>')
     else:
         methodSplit=recipeInfo[4]
-    return render_template("screens/viewrecipe.html", recipeName=recipeInfo[0],recipeID=recipeID, recipeDescription=recipeInfo[1], preparationTime=recipeInfo[3], recipeMethods=methodSplit, recipeTag=recipeInfo[5])
+    return render_template("screens/viewrecipe.html", recipeName=recipeInfo[0],recipeID=recipeID, recipeDescription=recipeInfo[1], preparationTime=recipeInfo[3], recipeMethods=methodSplit, recipeTag=recipeInfo[5], recipeImage=recipeInfo[6])
 
 UPLOAD_FOLDER = 'static/styles/recipeimages/'
 
@@ -159,9 +169,10 @@ def addRecipe():
 def editRecipe():
     user=session['userID']
     recipeID = request.args.get('recipeID')
+
+    
     if request.method=='POST':
         if request.files:
-            print(request.files)
             file = request.files['recipeImage']
             # if user does not select file, browser also
             # submit a empty part without filename
@@ -170,6 +181,13 @@ def editRecipe():
                 file.save(os.path.join(UPLOAD_FOLDER, recipeFileName))
                 recipeImage=UPLOAD_FOLDER+recipeFileName
         cur = mysql.connection.cursor()
+        deleteRecipe=request.form.get('deleteRecipe')
+        print("delete+", deleteRecipe)
+        if deleteRecipe=="1":
+            cur.execute("Delete from RecipeInfo where recipeID=%s", [recipeID])
+            mysql.connection.commit()
+            return redirect(url_for("yourRecipes"))
+
         recipeName=request.form.get('recipeName')
         recipeDescription=request.form.get('recipeDescription')
         preparationTime=request.form.get('preparationTime')

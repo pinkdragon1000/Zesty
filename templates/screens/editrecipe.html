@@ -1,10 +1,11 @@
-{% extends './common/recipeTitleNavTemplate.html' %}
+{% extends './common/editableTitleTemplate.html' %}
 
 {% block content %}
 
-<a class="btn white-text" type="submit" style="float:right" onclick="javascript: addEditRecipeForm.submit();return false;" href="">Save Recipe</a>
+<a class="btn white-text" type="submit" style="float:right"
+    onclick="javascript: addEditRecipeForm.submit();return false;" href="">Save Recipe</a>
 <a class="circular-btn delete white-text fa fa-trash fa-2x" type="submit" style="float:right" data-toggle="tooltip"
-data-placement="bottom" title="Delete Recipe" onclick="javascript: deleteConfirm();return false;"></a>
+    data-placement="bottom" title="Delete Recipe" onclick="javascript: deleteConfirm(); return false;" href=""></a>
 
 {% include './common/editAddRecipeTemplate.html' %}
 

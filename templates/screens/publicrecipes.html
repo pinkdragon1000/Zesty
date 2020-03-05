@@ -1,4 +1,4 @@
-{% extends './common/viewRecipeTemplate.html' %}
+{% extends './common/uneditableTitleTemplate.html' %}
 
 {% block content %}
 <div class="row">
@@ -21,7 +21,7 @@
 
   {% for publicRecipe in publicRecipeCard %}
   
-  <a class="publicRecipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=publicRecipe[0] )}}">
+  <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=publicRecipe[0] )}}">
     <span class="recipeText">{{ publicRecipe[1] }}</span>
   </a>
   {% endfor %}

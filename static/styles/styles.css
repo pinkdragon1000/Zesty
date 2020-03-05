@@ -1,10 +1,8 @@
-html {
-  font-family: sans-serif;
-}
 
 body {
   margin: 0;
-  background-color:#EBF3F6
+  background-color:#EBF3F6;
+  font-family: 'Nunito', sans-serif;
 }
 
 .green-blue-gradient {
@@ -14,13 +12,12 @@ body {
 
 .btn {
   background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
-  border-radius: 5rem;
+  border-radius: 0.3rem;
   padding:0.7rem;
   color:white;
   justify-content:center;
   text-transform:uppercase;
   text-align:center;
-  width:10rem;
   height:3rem;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -34,9 +31,13 @@ body {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.fa.fa-question{
+  padding-top:0.8rem;
+}
+
 .circular-btn {
   background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
-  border-radius: 5rem;
+  border-radius: 0.3rem;
   padding:0.7rem;
   color:white;
   justify-content:center;
@@ -118,11 +119,11 @@ color:white;
 
 .logintitle{
 padding-top:3.125rem;
-padding-left:5rem;
 margin-right: auto;
 margin-left: auto;
 text-align:center;
 vertical-align:middle;
+font-family: 'Spirax', cursive;
 }
 
 .white-text{
@@ -148,7 +149,7 @@ font-size:1rem;
   border-radius:5rem;
   background-color:white;
   line-height: 3rem;
-  padding:0rem;
+  padding:0rem 0.75rem;
 }
 
 .custom-control-input:checked~.custom-control-label::before{
@@ -170,7 +171,6 @@ label{
 
 .recipeBox{
   margin-top:2rem;
-  text-align:center;
 }
 
 .recipeCard{
@@ -257,6 +257,10 @@ input[type="file"] {
 }
 
 .fa.fa-edit{
+  padding:0.5rem;
+}
+
+.fa.fa-trash{
   padding:0.5rem;
 }
 

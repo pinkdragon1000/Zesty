@@ -1,4 +1,4 @@
-{% extends './common/viewRecipeTemplate.html' %}
+{% extends './common/uneditableTitleTemplate.html' %}
 
 {% block content %}
 
@@ -29,7 +29,7 @@
                 {{preparationTime}}
             </p>
 
-            <h5 class="recipeCard">Recipe Image</h5>
+            <h5 class="recipeCard" style= 'background-image: url({{recipeImage}});'></h5>
 
             <h5>
                 Methods:
