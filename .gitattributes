@@ -2,5 +2,5 @@
 * text=auto
 *.sql linguist-detectable=true
 *.sql linguist-language=sql
-*.jinja linguist-detable=true
+*.jinja linguist-detectable=true
 *.jinja linguist-language=jinja
