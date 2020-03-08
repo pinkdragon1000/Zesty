@@ -13,7 +13,7 @@
         <input type="text" class="form-control" name="recipeDescription" placeholder="Type in your recipe description"
             value="{{recipeDescription}}" required />
         <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitches" name="recipePermission"
+            <input type="checkbox" class="custom-control-input" id="customSwitches" name="recipePermission" value="on"
                 {{recipePermission}}>
             <label class="custom-control-label" for="customSwitches">Make Recipe Public</label>
         </div>
@@ -37,25 +37,26 @@
             <div id="ingredients"
                 style="border:#ccc 0.1rem solid; padding:1rem; border-radius:3rem; margin-bottom:1rem;">
                 <label>Ingredient Amount</label>
-                <input type="text" class="form-control" name="ingredientAmount"
+                <input type="text" class="form-control" name="ingredientAmount" id="ingredientAmount" 
                     placeholder="Type in an ingredient amount" value="{{ingredientAmount}}" />
                 <label>Ingredient Unit</label><br>
-                <select class="selectpicker" data-live-search="true">
-                    <option data-tokens="teaspoon">Teaspoon</option>
-                    <option data-tokens="tablespoon">Tablespoon</option>
-                    <option data-tokens="fluidOunce">Fluid Ounce</option>
-                    <option data-tokens="cup">Cup</option>
-                    <option data-tokens="pint">Pint</option>
-                    <option data-tokens="quart">Quart</option>
-                    <option data-tokens="gallon">Gallon</option>
-                    <option data-tokens="pound">Pound</option>
-                    <option data-tokens="pound">Ounce</option>
+                <select class="selectpicker" data-live-search="true" name="ingredientUnit" id="ingredientUnit">
+                    <option data-tokens="teaspoon" value="teaspoon"></option>
+                    <option data-tokens="teaspoon" value="teaspoon">Teaspoon</option>
+                    <option data-tokens="tablespoon" value="tablespoon">Tablespoon</option>
+                    <option data-tokens="fluidOunce" value="fluidOunce">Fluid Ounce</option>
+                    <option data-tokens="cup" value="cup">Cup</option>
+                    <option data-tokens="pint" value="pint">Pint</option>
+                    <option data-tokens="quart" value="quart">Quart</option>
+                    <option data-tokens="gallon" value="gallon">Gallon</option>
+                    <option data-tokens="pound" value="pound">Pound</option>
+                    <option data-tokens="ounce" value="ounce">Ounce</option>
                 </select>
 
                 <br>
-
+                
                 <label>Ingredient Name</label>
-                <input type="text" class="form-control" name="ingredientName" placeholder="Type in an ingredient name"
+                <input type="text" class="form-control" name="ingredientName" placeholder="Type in an ingredient name" id="ingredientName"
                     value="{{ingredientName}}" />
             </div>
         </div>

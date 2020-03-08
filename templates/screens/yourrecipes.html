@@ -15,21 +15,31 @@
         </div>
         <input type="search" class="form-control" name="search" placeholder="Search for a recipe" value="{{search}}" />
       </div>
+      <br>
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="customSwitches" name="showPublic"
+            {{showPublic}} onchange="javascript:document.getElementById('search').submit()">
+        <label class="custom-control-label" for="customSwitches">Show Public Recipes</label>
+    </div>
     </div>
   </form>
 </div>
 
 
 <div class="recipeBox">
+      {% for recipe in recipeCard %}
 
-  {% for recipe in recipeCard %}
 
+      <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=recipe[0] )}}"
+        style='background-image: url({{recipe[2]}});'>
+        <span class="recipeText">{{ recipe[1] }}</span>
+      </a>
+    
+      {% endfor %}
 
-  <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=recipe[0] )}}"
-    style='background-image: url({{recipe[2]}});'>
-    <span class="recipeText">{{ recipe[1] }}</span>
-  </a>
+    
+  </div>
 
-  {% endfor %}
+  
 </div>
 {% endblock %}

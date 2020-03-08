@@ -10,6 +10,12 @@ body {
   padding:1.7rem;
 }
 
+.green-blue-gradient-intro {
+  background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
+  height:50%;
+}
+
+
 .btn {
   background: linear-gradient(45deg, rgb(0, 188, 174), rgb(0, 143, 173));
   border-radius: 0.3rem;
@@ -70,10 +76,7 @@ body {
   margin-right:1rem;
 }
 
-.main{
-  background-color: #FFFFFF;
-  position: relative;
-}
+
 h4{
   line-height: 1.4em;
 }
@@ -167,6 +170,7 @@ textarea{
 label{
   font-size:1rem;
   line-height:1.5rem;
+  font-weight:bold;
 }
 
 .recipeBox{
@@ -195,6 +199,9 @@ label{
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.fa.fa-cutlery{
+padding-right:1rem;
+}
 .recipeText {
   position: inherit;
   background: linear-gradient(45deg, rgba(0, 188, 174, 0.75), rgb(0, 143, 173, 0.75));

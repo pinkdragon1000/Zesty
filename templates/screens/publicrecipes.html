@@ -1,10 +1,10 @@
-{% extends './common/uneditableTitleTemplate.html' %}
+{% extends './common/publicPageTemplate.html' %}
 
 {% block content %}
 <div class="row">
   <div class="col-md-8">
 
-    <p>Click on a recipe to view it. Add a recipe by navigating to "Add Recipe" in the navigation bar.</p>
+    <p>These are public recipes.  Click on a recipe to view it. To manage your recipes click "Sign-In" in the navigation bar.</p>
   </div>
   <div class="col-md-4">
     <div class="input-group">
@@ -21,7 +21,7 @@
 
   {% for publicRecipe in publicRecipeCard %}
   
-  <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=publicRecipe[0] )}}">
+  <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=publicRecipe[0] )}}" style='background-image: url({{publicRecipe[2]}});'>
     <span class="recipeText">{{ publicRecipe[1] }}</span>
   </a>
   {% endfor %}

@@ -99,32 +99,33 @@ def yourRecipes():
     cur = mysql.connection.cursor()
     user=session['userID']
     search=""
+    showPublic = True
     if request.method=='POST':
         search=request.form.get('search')
+        showPublic= True if request.form.get('showPublic') == 'on' else False
     cur.execute('SELECT fullName FROM Zesty.Users where userID=%s', [user])
     name = cur.fetchone()
     if search != "":
         searchQuery = '%' + search + '%'
-        cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where userID=%s and recipeName like %s', [user,searchQuery])
+        if showPublic:
+            cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where (userID=%s or ispublic=1) and recipeName like %s', [user,searchQuery])
+        else:
+            cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where (userID=%s) and recipeName like %s', [user,searchQuery])
     else:
-        cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where userID=%s', [user])
+        if showPublic:
+            cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where (userID=%s or ispublic=1)' , [user])
+        else:
+            cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where userID=%s', [user])
     recipes=cur.fetchall()
-    return render_template("screens/yourrecipes.html", recipeCard=recipes, recipeName=name[0]+"'s Recipes", search=search)
+    return render_template("screens/yourrecipes.html", recipeCard=recipes, recipeName=name[0]+"'s Recipes", search=search, showPublic="checked" if showPublic else "")
 
-@app.route('/publicRecipes', methods=['GET', 'POST'])
-def publicRecipes():
-    cur = mysql.connection.cursor()
-    user=session['userID']
-    cur.execute('SELECT recipeID, recipeName FROM Zesty.RecipeInfo where ispublic=1')
-    publicRecipes=cur.fetchall()
-    return render_template("screens/publicrecipes.html", publicRecipeCard=publicRecipes, recipeName="Public Recipes")
 
 @app.route('/viewRecipe', methods=['GET'])
 def viewRecipe():
     cur = mysql.connection.cursor()
     user=session['userID']
     recipeID = request.args.get('recipeID')
-    cur.execute('SELECT recipeName, recipeDescription, preparationTime, yield, methods, recipeTag, recipeImage FROM Zesty.RecipeInfo where userID=%s and recipeID=%s', [user, recipeID])
+    cur.execute('SELECT recipeName, recipeDescription, preparationTime, yield, methods, recipeTag, recipeImage FROM Zesty.RecipeInfo where (userID=%s or ispublic=1) and recipeID=%s', [user, recipeID])
     recipeInfo=cur.fetchone()
     if(recipeInfo[4] !=None):
         methodSplit=recipeInfo[4].replace('\n', '<br>')
@@ -140,7 +141,9 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 def addRecipe():
     cur = mysql.connection.cursor()
     user=session['userID']
+    recipePermission="unchecked"
     if request.method=='POST':
+        recipeImage = ''
         if request.files:
             print(request.files)
             file = request.files['recipeImage']
@@ -163,15 +166,46 @@ def addRecipe():
             recipePermission=0
         cur.execute('INSERT into Zesty.RecipeInfo (recipeName, recipeDescription, preparationTime, yield, methods, recipeTag, ispublic, recipeImage, userID) values (%s,%s,%s,%s,%s, %s, %s, %s, %s)',[recipeName, recipeDescription, preparationTime, recipeYield, recipeMethods, recipeTag, recipePermission, recipeImage, user])
         mysql.connection.commit()
-    return render_template("screens/addrecipe.html", formAction="/addRecipe")
+        '''
+        recipePermission=cur.fetchone()[6]
+        if(recipePermission==1):
+            recipePermission="checked"
+        else:
+            recipePermission="unchecked"
+
+        '''
+
+        ingredientAmounts = request.form.getlist('ingredientAmount')
+        ingredientUnits = request.form.getlist('ingredientUnit')
+        ingredientNames = request.form.getlist('ingredientName')
+
+        for (amount, unit, name) in zip(ingredientAmounts,ingredientUnits,ingredientNames):
+            print((amount, unit, name))
+
+        '''
+        cur.execute('SELECT recipeID from Zesty.RecipeInfo')
+        
+        recipeID=cur.fetchone()[0]
+        print(recipeID)
+    
+        ingredientDescription=request.form.get("ingredientName")
+        print(ingredientDescription)
+        ingredientAmount=request.form.get("ingredientAmount")
+        print(ingredientAmount)
+        ingredientUnit=request.form.get("ingredientUnit")
+        print(ingredientUnit)
+        cur.execute('INSERT into Zesty.RecipeIngredients (recipeID, ingredientDescription, ingredientAmount, ingredientUnit) values (%s, %s, %s, %s)',[recipeID, ingredientDescription,ingredientAmount, ingredientUnit])
+        mysql.connection.commit()
+        '''
+    return render_template("screens/addrecipe.html", formAction="/addRecipe", recipePermission=recipePermission)
 
 @app.route('/editRecipe', methods=['GET', 'POST'])
 def editRecipe():
     user=session['userID']
     recipeID = request.args.get('recipeID')
-
     
     if request.method=='POST':
+        recipeImage = ''
         if request.files:
             file = request.files['recipeImage']
             # if user does not select file, browser also
@@ -198,6 +232,7 @@ def editRecipe():
         if(recipePermission=="on"):
             recipePermission=1
         else:
+            print("recipePermission",recipePermission)
             recipePermission=0
         cur.execute("UPDATE Zesty.RecipeInfo SET recipeName=%s, recipeDescription=%s, preparationTime=%s, yield=%s, methods=%s, recipeTag=%s, ispublic=%s, recipeImage=%s where userID=%s and recipeID=%s", [recipeName, recipeDescription, preparationTime, recipeYield, recipeMethods, recipeTag, recipePermission, recipeImage, user, recipeID])
         mysql.connection.commit()
@@ -208,6 +243,10 @@ def editRecipe():
         recipePermission="checked"
     else:
         recipePermission="unchecked"
+    '''
+    selectCur.execute('SELECT ingredientDescription,ingredientAmount, ingredientUnit FROM Zesty.RecipeInfo where recipeID=%s', [recipeID])
+    ingredientInfo=selectCur.fetchall()
+    '''
     return render_template("screens/editrecipe.html", recipeName=recipeInfo[0], recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=recipeInfo[4], recipeTag=recipeInfo[5], recipePermission=recipePermission, recipeImage=recipeInfo[7], formAction=url_for("editRecipe",recipeID=recipeID))
 
 @app.route('/groceries', methods=['GET'])
@@ -224,7 +263,6 @@ def profile():
         email = request.form.get('email')
         update_cur.execute("UPDATE Zesty.Users SET fullName=%s, email=%s where userID=%s", [name, email, user])
         mysql.connection.commit()
-
     cur = mysql.connection.cursor()
     cur.execute('SELECT fullName, email FROM Zesty.Users where userID=%s', [user])
     profileInfo = cur.fetchone()
