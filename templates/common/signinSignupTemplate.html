@@ -1,5 +1,5 @@
 <!--Signup/Signin Template-->
-
+<!doctype html>
 <html lang="en">
 
   {% include './common/headTemplate.html'%}
@@ -9,13 +9,58 @@
 
   <div class="green-blue-gradient">
     <div>
-      <h1 class="logintitle"> <a class="fa fa-cutlery fa-2x"></a>Zesty</h1>
+      <h1 class="login-title"> <a class="fa fa-cutlery fa-2x"></a>Zesty</h1>
     </div>
   </div>
 
 
   <div class="col-md-6 padding">
+    <div class="mb-3">
+      <h3>{{pageName}}</h3>
+      <form method='POST' id="formSubmit" action="{{formAction}}">
+        {% if validationMessage != "" %}
+        <div class="validation-msg">{{ validationMessage }}</div>
+        {% endif %}
+
+    {% if path == "/signup" %}
+    <label class="black-text">Full Name</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon">
+          <a class="fa fa-user"></a>
+        </span>
+      </div>
+      <input type="fullName" class="form-control" name="fullName" placeholder="Type in your full name" required />
+    </div>
+    {% endif %}
+
+    <label class="black-text">Email</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon">
+          <a class="fa fa-envelope"></a>
+        </span>
+      </div>
+      <input type="email" class="form-control" name="email" placeholder="Type in your email" required />
+    </div>
+</div>
+
+<div class="mb-3">
+  <label class="black-text"> Password</label>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon">
+        <a class="fa fa-lock"></a>
+      </span>
+    </div>
+    <input type="password" class="form-control" name="password" placeholder="Type in your password" required />
+  </div>
+</div>
+
     {% block content %}{% endblock %}
+
+    
+  </form>
   </div>
 </body>
 

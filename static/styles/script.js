@@ -14,7 +14,7 @@ function duplicateIngredients() {
   var itm = document.getElementById("ingredients");
   var cln = itm.cloneNode(true);
   cln.querySelector('#ingredientAmount').value = '';
-  cln.querySelector('#ingredientUnit').value = 'teaspoon';
+  cln.querySelector('#ingredientUnit').value = 'none';
   cln.querySelector('#ingredientName').value = '';
   document.getElementById("ingredientBox").appendChild(cln);
 

@@ -7,13 +7,14 @@
         <label for="file-upload" class="fileUpload">Upload a Recipe Image</label><br>
         <i class="fa fa-upload"></i>
 
+        <input type="hidden" name="recipeImageUrl" value="{{recipeImageUrl}}">
         <input id="recipeImage" type="file" name="recipeImage" />
         <br>
         <label>Recipe Description</label>
         <input type="text" class="form-control" name="recipeDescription" placeholder="Type in your recipe description"
             value="{{recipeDescription}}" required />
         <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitches" name="recipePermission" value="on"
+            <input type="checkbox" class="custom-control-input" id="customSwitches" name="recipePermission"
                 {{recipePermission}}>
             <label class="custom-control-label" for="customSwitches">Make Recipe Public</label>
         </div>
@@ -30,36 +31,41 @@
         <textarea class="form-control" name="recipeMethods" rows="13" cols="60"
             placeholder="Please enter your recipe methods/steps here...">{{recipeMethods}}</textarea>
     </div>
+
     <div class="col-md-5">
         <label>Ingredients</label>
         <br>
+
+        {% for ingredient in ingredientInfo %}
         <div id="ingredientBox">
             <div id="ingredients"
                 style="border:#ccc 0.1rem solid; padding:1rem; border-radius:3rem; margin-bottom:1rem;">
                 <label>Ingredient Amount</label>
                 <input type="text" class="form-control" name="ingredientAmount" id="ingredientAmount" 
-                    placeholder="Type in an ingredient amount" value="{{ingredientAmount}}" />
+                    placeholder="Type in an ingredient amount" value="{{ingredient[1]}}" />
                 <label>Ingredient Unit</label><br>
                 <select class="selectpicker" data-live-search="true" name="ingredientUnit" id="ingredientUnit">
-                    <option data-tokens="teaspoon" value="teaspoon"></option>
-                    <option data-tokens="teaspoon" value="teaspoon">Teaspoon</option>
-                    <option data-tokens="tablespoon" value="tablespoon">Tablespoon</option>
-                    <option data-tokens="fluidOunce" value="fluidOunce">Fluid Ounce</option>
-                    <option data-tokens="cup" value="cup">Cup</option>
-                    <option data-tokens="pint" value="pint">Pint</option>
-                    <option data-tokens="quart" value="quart">Quart</option>
-                    <option data-tokens="gallon" value="gallon">Gallon</option>
-                    <option data-tokens="pound" value="pound">Pound</option>
-                    <option data-tokens="ounce" value="ounce">Ounce</option>
+                    <option data-tokens="none" value="none" {% if ingredient[2] == 'none' %} selected {% endif %}></option>></option>
+                    <option data-tokens="teaspoon" value="teaspoon" {% if ingredient[2] == 'teaspoon' %} selected {% endif %}>Teaspoon</option>
+                    <option data-tokens="tablespoon" value="tablespoon" {% if ingredient[2] == 'tablespoon' %} selected {% endif %}>Tablespoon</option>
+                    <option data-tokens="fluidOunce" value="fluidOunce" {% if ingredient[2] == 'fluidOunce' %} selected {% endif %}>Fluid Ounce</option>
+                    <option data-tokens="cup" value="cup" {% if ingredient[2] == 'cup' %} selected {% endif %}>Cup</option>
+                    <option data-tokens="pint" value="pint" {% if ingredient[2] == 'pint' %} selected {% endif %}>Pint</option>
+                    <option data-tokens="quart" value="quart" {% if ingredient[2] == 'quart' %} selected {% endif %}>Quart</option>
+                    <option data-tokens="gallon" value="gallon" {% if ingredient[2] == 'gallon' %} selected {% endif %}>Gallon</option>
+                    <option data-tokens="pound" value="pound" {% if ingredient[2] == 'pound' %} selected {% endif %}>Pound</option>
+                    <option data-tokens="ounce" value="ounce" {% if ingredient[2] == 'ounce' %} selected {% endif %}>Ounce</option>
                 </select>
 
                 <br>
                 
                 <label>Ingredient Name</label>
                 <input type="text" class="form-control" name="ingredientName" placeholder="Type in an ingredient name" id="ingredientName"
-                    value="{{ingredientName}}" />
+                    value="{{ingredient[0]}}" />
+                <a onclick="javascript: var el = this.parentNode; el.parentNode.removeChild(el); return false;">Remove</a>
             </div>
         </div>
+        {% endfor %}
         <a class="btn white-text" type="submit" style="float:right"
             onclick="javascript: duplicateIngredients();return false;" href="">Add Ingredient</a>
     </div>

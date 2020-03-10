@@ -28,18 +28,12 @@
 
 <div class="recipeBox">
       {% for recipe in recipeCard %}
-
-
       <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=recipe[0] )}}"
         style='background-image: url({{recipe[2]}});'>
         <span class="recipeText">{{ recipe[1] }}</span>
       </a>
     
       {% endfor %}
-
-    
   </div>
-
-  
 </div>
 {% endblock %}

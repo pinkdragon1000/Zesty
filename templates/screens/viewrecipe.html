@@ -4,12 +4,18 @@
 
 <div>
     <div style="border-radius:5rem; border: black;">
-        <a class="circular-btn white-text fa fa-cart-plus fa-2x" type="submit" style="float:right" data-toggle="tooltip"
-            data-placement="bottom" title="Add to Grocery List"
-            href="{{url_for('editRecipe', recipeID=recipeID )}}"></a>
-        <a class="circular-btn white-text fa fa-edit fa-2x" type="submit" style="float:right" data-toggle="tooltip"
-            data-placement="bottom" title="Edit Recipe" href="{{url_for('editRecipe', recipeID=recipeID )}}"></a>
-
+        {% if isMine %}
+        <a class="btn white-text" type="submit" style="float:right" data-toggle="tooltip" data-placement="bottom"
+            title="Edit Recipe" href="{{url_for('editRecipe', recipeID=recipeID )}}">Edit Recipe</a>
+        <br><br><br>
+        {% endif %}
+        <form method='POST' id="inGroceryList" action="{{formAction}}">
+            <div class="custom-control custom-switch" style="float:right">
+                <input type="checkbox" class="custom-control-input" id="customSwitches" name="inGroceries"
+                    {{inGroceries}} onchange="javascript:document.getElementById('inGroceryList').submit()">
+                <label class="custom-control-label" for="customSwitches">In Grocery List</label>
+            </div>
+        </form>
     </div>
     <br><br>
     <div class="row">
@@ -35,7 +41,7 @@
             <p>
                 {{recipeYield}}
             </p>
-            <h5 class="recipeCard" style= 'background-image: url({{recipeImage}});'></h5>
+            <h5 class="recipeCard" style='background-image: url({{recipeImage}});'></h5>
 
             <h5>
                 Methods:
@@ -46,6 +52,10 @@
         </div>
         <div class="col-md-6">
             <h5>Ingredients</h5>
+            {% for ingredient in ingredientInfo %}
+            {{ingredient[1]}} {{ingredient[2]}} {{ingredient[0]}}
+            <br>
+            {% endfor %}
             <p></p>
         </div>
     </div>

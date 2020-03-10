@@ -16,10 +16,32 @@ CREATE TABLE `RecipeInfo` (
   `yield` varchar(128) DEFAULT NULL,
   `methods` mediumtext,
   `recipeImage` varchar(255) DEFAULT NULL,
-  `userID` int(11) NOT NULL,
+  `userID` int(11) DEFAULT NULL,
   `ispublic` tinyint(1) NOT NULL,
-  `ingredients` varchar(2000) NOT NULL, 
   PRIMARY KEY (`recipeID`),
   KEY `fk_userID` (`userID`),
   CONSTRAINT `fk_userID` FOREIGN KEY (`userID`) REFERENCES `Users` (`userID`)
+);
+
+CREATE TABLE `RecipeIngredients` (
+  `ingredientID` int(11) NOT NULL AUTO_INCREMENT,
+  `recipeID` int(11) NOT NULL,
+  `ingredientDescription` varchar(128) DEFAULT NULL,
+  `ingredientAmount` int(11) NOT NULL,
+  `ingredientUnit` varchar(128) NOT NULL,
+  PRIMARY KEY (`ingredientID`),
+  KEY `fk_recipeID` (`recipeID`),
+  CONSTRAINT `fk_recipeID` FOREIGN KEY (`recipeID`) REFERENCES `RecipeInfo` (`recipeID`) ON DELETE CASCADE
+);
+
+CREATE TABLE `GroceryList` (
+  `listID` int(11) NOT NULL AUTO_INCREMENT,
+  `recipeID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  PRIMARY KEY (`listID`),
+  UNIQUE KEY `userID` (`userID`,`recipeID`),
+  KEY `fk_userID2` (`userID`),
+  KEY `fk_recipeID2` (`recipeID`),
+  CONSTRAINT `fk_recipeID2` FOREIGN KEY (`recipeID`) REFERENCES `RecipeInfo` (`recipeID`) ON DELETE CASCADE,
+  CONSTRAINT `fk_userID2` FOREIGN KEY (`userID`) REFERENCES `Users` (`userID`) ON DELETE CASCADE
 );

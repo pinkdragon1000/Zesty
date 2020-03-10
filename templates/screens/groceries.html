@@ -2,6 +2,18 @@
 
 {% block content %}
 
-<a class="btn white-text" type="submit" style="float:right" href="">Clear Groceries</a>
+<a class="btn white-text" type="submit" style="float:right" onclick="javascript: groceryList.submit();return false;" href="">Clear Groceries</a>
+<br><br>
+<form id="groceryList" method='POST'>
+    {% for ingredient in groceryListIngredients %}
+    <span class="todo-wrap">
+      <input type="checkbox" id="{{loop.index0}}"/>
+      <label for="{{loop.index0}}" class="todo">
+        <i class="fa fa-check"></i>
+        {{ingredient[0]}}
+      </label>
+    </span>
+    {% endfor %}
+  </form>
 
 {% endblock %}

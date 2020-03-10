@@ -6,12 +6,17 @@
 
 <body>
 
-  <form method='POST' id="addEditRecipeForm" action="{{formAction}}" enctype="multipart/form-data">
+  <form method='POST' id="formSubmit" action="{{formAction}}" enctype="multipart/form-data">
     <div>
       {% include './common/navbarTemplate.html' %}
       {% block title %}
-      <input type="text" class="page-name" name="recipeName" placeholder="Type in a recipe name here..."
+      {% if editableTitle %}
+      <input type="text" class="page-name" name="page-name" placeholder="Type in a recipe name here..."
         value="{{recipeName}}">
+      {% else %}
+      <input type="text" class="page-name uneditable" value="{{recipeName}}"
+      disabled>
+      {% endif %}
       {% endblock %}
     </div>
     <div class="content">

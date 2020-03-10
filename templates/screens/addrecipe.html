@@ -1,7 +1,7 @@
-{% extends './common/editableTitleTemplate.html' %}
+{% extends './common/pageTemplate.html' %}
 
 {% block content %}
-<a class="btn white-text" style="float:right" type="submit" onclick="javascript: addEditRecipeForm.submit();return false;" href="">Create Recipe</a>
+<a class="btn white-text" style="float:right" type="submit" onclick="javascript: formSubmit.submit();return false;" href="">Create Recipe</a>
 
 {% include './common/editAddRecipeTemplate.html' %}
 
