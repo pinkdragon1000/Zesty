@@ -1,2 +1,2 @@
-recipeimages/*
-!recipeimages/.keep
+/static/styles/recipeimages/*
+!/static/styles/recipeimages/.keep
