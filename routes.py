@@ -2,8 +2,6 @@
 from flask import Flask, request,jsonify, render_template, send_from_directory,session,redirect,url_for
 import os
 from flask_login import LoginManager
-#from flask_wtf import FlaskForm
-#from wtforms import StringField, PasswordField, SubmitField
 from flask_mysqldb import MySQL
 import MySQLdb
 import re
@@ -23,7 +21,6 @@ passwordSalt = "5gz"
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/styles'),'favicon.ico',mimetype='image/vnd.microsoft.icon')
-
 
 @app.route("/logout", methods=['GET'])
 def logout():
@@ -100,16 +97,13 @@ def signup():
             dbPassword = password+passwordSalt
             hashedObject= hashlib.md5(dbPassword.encode())
             password=hashedObject.hexdigest()
-            print('hashed pw', password)
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
             cursor.execute('INSERT INTO Zesty.Users (fullName, email, password) VALUES (%s, %s, %s)', (fullName, email, password))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
             return redirect(url_for('yourRecipes'))
-    print(msg)
     # Show registration form with message (if any)
     return render_template('screens/signup.html', validationMessage=msg, pageName="Sign Up", formAction="/signup", path=request.path)
-
 
 @app.route('/yourRecipes', methods=['GET', 'POST'])
 def yourRecipes():
@@ -117,7 +111,6 @@ def yourRecipes():
         return redirect("/", code=302)
     cur = mysql.connection.cursor()
     user=session['userID']
-    print('user:',user)
     search=""
     showPublic = True
     # Recipe Search
@@ -143,7 +136,6 @@ def yourRecipes():
     recipes=cur.fetchall()
     return render_template("screens/yourrecipes.html", recipeCard=recipes, pageName=name[0]+"'s Recipes", search=search, showPublic="checked" if showPublic else "", formAction="/yourRecipes")
 
-
 @app.route('/viewRecipe', methods=['GET', 'POST'])
 def viewRecipe():
     if 'loggedin' not in session:
@@ -152,16 +144,12 @@ def viewRecipe():
     user=session['userID']
     recipeID = request.args.get('recipeID')
     if request.method=='POST':
-        print('in post')
         inGroceries=request.form.get('inGroceries')
-        print(inGroceries)
         # Inserts ingredients into grocery list if the toggle is on
         if inGroceries=="on":
-            print("recipe in groceries")
             cur.execute('INSERT INTO Zesty.GroceryList (userID, recipeID) values (%s,%s)', [user, recipeID])
         # Deletes ingredients from grocery list if the toggle is off
         else:
-            print('not in groceries')
             cur.execute('DELETE FROM Zesty.GroceryList where userID=%s and recipeID=%s',[user, recipeID])
         mysql.connection.commit()
         
@@ -210,7 +198,6 @@ def addRecipe():
     if request.method=='POST':
         recipeImage = ''
         if request.files:
-            print(request.files)
             file = request.files['recipeImage']
             # if user does not select file, browser also
             # submit a empty part without filename
@@ -248,9 +235,7 @@ def addRecipe():
             ingredientUnits = request.form.getlist('ingredientUnit')
             ingredientNames = request.form.getlist('ingredientName')
 
-            print('before')
             ingredientInfo = [[a,b,c] for (a,b,c) in zip(ingredientAmounts,ingredientUnits,ingredientNames)]
-            print('after', ingredientInfo)
             if len(ingredientInfo) == 0:
                 ingredientInfo=[['','','']]
 
@@ -320,8 +305,6 @@ def editRecipe():
     if len(ingredientInfo) == 0:
         ingredientInfo = [['','','']]  # make sure we have at least one
     ingredientInfo = [list(i) for i in ingredientInfo]
-
-    print("msg", msg)
     return render_template("screens/editrecipe.html", pageName=recipeInfo[0], recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=recipeInfo[4], recipeTag=recipeInfo[5], recipePermission=recipePermission, recipeImageUrl=recipeInfo[7], formAction=url_for("editRecipe",recipeID=recipeID),recipeID=recipeID, ingredientInfo=ingredientInfo, editableTitle=True, formInTemplate=True,  validationMessage=msg)
 
 @app.route('/groceries', methods=['GET', 'POST'])

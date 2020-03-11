@@ -8,9 +8,6 @@ function deleteConfirm() {
   }
 }
 function duplicateIngredients() {
-  //document.getElementByName("ingredientName").value="";
-  //document.getElementByName("ingredientAmount").value="";
-  //document.getElementByName("ingredientUnit").value="";
   var itm = document.getElementById("ingredients");
   var cln = itm.cloneNode(true);
   cln.querySelector('#ingredientAmount').value = '';
