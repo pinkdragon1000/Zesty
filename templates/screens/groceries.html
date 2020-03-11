@@ -2,6 +2,8 @@
 {% block content %}
 <a class="btn" type="submit" style="float:right" onclick="javascript: groceryList.submit();return false;" href="">Clear Groceries</a>
 <br><br>
+<p>To add items to your grocery list navigate to "Recipes" in the navigation bar, click on a recipe and tap the toggle "In Grocery List"</p>
+
 <form id="groceryList" method='POST'>
     {% for ingredient in groceryListIngredients %}
     <span class="grocery">

@@ -246,6 +246,7 @@ def addRecipe():
             for (amount, unit, name) in zip(ingredientAmounts,ingredientUnits,ingredientNames):
                 cur.execute("INSERT INTO Zesty.RecipeIngredients (recipeID, ingredientDescription, ingredientAmount, ingredientUnit) values (%s, %s, %s, %s);",[recipeID,name,amount,unit])
             mysql.connection.commit()
+            return redirect(url_for("yourRecipes"))
     return render_template("screens/addrecipe.html", formAction="/addRecipe", editableTitle=True, formInTemplate=True, validationMessage=msg, pageName=recipeName, recipeDescription=recipeDescription, preparationTime=preparationTime, recipeYield=recipeYield, recipeMethods=recipeMethods, recipeTag=recipeTag, recipePermission=recipePermission, ingredientInfo=ingredientInfo)
 
 @app.route('/editRecipe', methods=['GET', 'POST'])
@@ -309,6 +310,7 @@ def editRecipe():
     if len(ingredientInfo) == 0:
         ingredientInfo = [['','','']]  # make sure we have at least one
     ingredientInfo = [list(i) for i in ingredientInfo]
+    redirect(url_for("yourRecipes"))
     return render_template("screens/editrecipe.html", pageName=recipeInfo[0], recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=recipeInfo[4], recipeTag=recipeInfo[5], recipePermission=recipePermission, recipeImageUrl=recipeInfo[7], formAction=url_for("editRecipe",recipeID=recipeID),recipeID=recipeID, ingredientInfo=ingredientInfo, editableTitle=True, formInTemplate=True,  validationMessage=msg)
 
 @app.route('/groceries', methods=['GET', 'POST'])
