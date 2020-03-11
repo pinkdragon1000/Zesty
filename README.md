@@ -6,6 +6,9 @@
 
 Hosted on a Google Cloud VM instance running using Debian and a g1-small (1 vCPU, 1.7 GB memory) machine type.
 
+![/static/styles/Screenshot1.png](/static/styles/Screenshot1.png)
+![/static/styles/Screenshot1.png](/static/styles/Screenshot2.png)
+
 **Viewing the Application**
 
 http://35.225.209.228:5000
