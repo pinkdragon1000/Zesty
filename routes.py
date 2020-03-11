@@ -28,6 +28,11 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/styles'),'favicon.ico',mimetype='image/vnd.microsoft.icon')
 
 
+@app.route("/logout", methods=['GET'])
+def logout():
+    session.clear()
+    return redirect("/", code=302)
+
 @app.route('/', methods=['GET', 'POST'])
 def signin():
     # Output message if something goes wrong...
@@ -111,8 +116,11 @@ def signup():
 
 @app.route('/yourRecipes', methods=['GET', 'POST'])
 def yourRecipes():
+    if 'loggedin' not in session:
+        return redirect("/", code=302)
     cur = mysql.connection.cursor()
     user=session['userID']
+    print('user:',user)
     search=""
     showPublic = True
     # Recipe Search
@@ -141,6 +149,8 @@ def yourRecipes():
 
 @app.route('/viewRecipe', methods=['GET', 'POST'])
 def viewRecipe():
+    if 'loggedin' not in session:
+        return redirect("/", code=302)
     cur = mysql.connection.cursor()
     user=session['userID']
     recipeID = request.args.get('recipeID')
@@ -187,6 +197,16 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 @app.route('/addRecipe', methods=['GET', 'POST'])
 def addRecipe():
+    if 'loggedin' not in session:
+        return redirect("/", code=302)
+    msg=""
+    recipeName=""
+    recipeDescription=""
+    preparationTime=""
+    recipeYield=""
+    recipeMethods=""
+    recipeTag=""
+    ingredientInfo=[['','','']]
     cur = mysql.connection.cursor()
     user=session['userID']
     recipePermission="unchecked"
@@ -204,34 +224,49 @@ def addRecipe():
                 file.save(os.path.join(UPLOAD_FOLDER, recipeFileName))
                 recipeImage=UPLOAD_FOLDER+recipeFileName
         # Getting recipe information from the frontend
-        recipeName=request.form.get('recipeName')
-        recipeDescription=request.form.get('recipeDescription')
-        preparationTime=request.form.get('preparationTime')
-        recipeYield=request.form.get('recipeYield')
-        recipeMethods=request.form.get('recipeMethods')
-        recipeTag=request.form.get('recipeTag')
-        recipePermission=request.form.get('recipePermission')
+        recipeName=request.form.get('recipeName','')
+        recipeDescription=request.form.get('recipeDescription', '')
+        preparationTime=request.form.get('preparationTime', '')
+        recipeYield=request.form.get('recipeYield', '')
+        recipeMethods=request.form.get('recipeMethods', '')
+        recipeTag=request.form.get('recipeTag', '')
+        recipePermission=request.form.get('recipePermission', '')
 
         recipePermission= 1 if request.form.get('recipePermission') == 'on' else 0
-        cur.execute('INSERT into Zesty.RecipeInfo (recipeName, recipeDescription, preparationTime, yield, methods, recipeTag, ispublic, recipeImage, userID) values (%s,%s,%s,%s,%s, %s, %s, %s, %s)',[recipeName, recipeDescription, preparationTime, recipeYield, recipeMethods, recipeTag, recipePermission, recipeImage, user])
-        mysql.connection.commit()
-        cur.execute("SELECT LAST_INSERT_ID()")
-        recipeID = cur.fetchone()[0]
 
-        cur.execute('DELETE FROM Zesty.RecipeIngredients where recipeID = %s;',[recipeID])
-        mysql.connection.commit()
+        if recipeName=="":
+            msg="Please enter in a valid recipe name"
+        elif recipeMethods=="":
+            msg="Please enter in valid recipe methods"
+        else:
+            cur.execute('INSERT into Zesty.RecipeInfo (recipeName, recipeDescription, preparationTime, yield, methods, recipeTag, ispublic, recipeImage, userID) values (%s,%s,%s,%s,%s, %s, %s, %s, %s)',[recipeName, recipeDescription, preparationTime, recipeYield, recipeMethods, recipeTag, recipePermission, recipeImage, user])
+            mysql.connection.commit()
+            cur.execute("SELECT LAST_INSERT_ID()")
+            recipeID = cur.fetchone()[0]
 
-        ingredientAmounts = request.form.getlist('ingredientAmount')
-        ingredientUnits = request.form.getlist('ingredientUnit')
-        ingredientNames = request.form.getlist('ingredientName')
+            cur.execute('DELETE FROM Zesty.RecipeIngredients where recipeID = %s;',[recipeID])
+            mysql.connection.commit()
 
-        for (amount, unit, name) in zip(ingredientAmounts,ingredientUnits,ingredientNames):
-            cur.execute("INSERT INTO Zesty.RecipeIngredients (recipeID, ingredientDescription, ingredientAmount, ingredientUnit) values (%s, %s, %s, %s);",[recipeID,name,amount,unit])
-        mysql.connection.commit()
-    return render_template("screens/addrecipe.html", formAction="/addRecipe", recipePermission=recipePermission,ingredientInfo=[['','','']], editableTitle=True)
+            ingredientAmounts = request.form.getlist('ingredientAmount')
+            ingredientUnits = request.form.getlist('ingredientUnit')
+            ingredientNames = request.form.getlist('ingredientName')
+
+            print('before')
+            ingredientInfo = [[a,b,c] for (a,b,c) in zip(ingredientAmounts,ingredientUnits,ingredientNames)]
+            print('after', ingredientInfo)
+            if len(ingredientInfo) == 0:
+                ingredientInfo=[['','','']]
+
+            for (amount, unit, name) in zip(ingredientAmounts,ingredientUnits,ingredientNames):
+                cur.execute("INSERT INTO Zesty.RecipeIngredients (recipeID, ingredientDescription, ingredientAmount, ingredientUnit) values (%s, %s, %s, %s);",[recipeID,name,amount,unit])
+            mysql.connection.commit()
+    return render_template("screens/addrecipe.html", formAction="/addRecipe", editableTitle=True, formInTemplate=True, validationMessage=msg, recipeName=recipeName, recipeDescription=recipeDescription, preparationTime=preparationTime, recipeYield=recipeYield, recipeMethods=recipeMethods, recipeTag=recipeTag, recipePermission=recipePermission, ingredientInfo=ingredientInfo)
 
 @app.route('/editRecipe', methods=['GET', 'POST'])
 def editRecipe():
+    if 'loggedin' not in session:
+        return redirect("/", code=302)
+    msg=''
     user=session['userID']
     recipeID = request.args.get('recipeID')
     
@@ -289,11 +324,13 @@ def editRecipe():
         ingredientInfo = [['','','']]  # make sure we have at least one
     ingredientInfo = [list(i) for i in ingredientInfo]
 
-    print("editRecipe", ingredientInfo)
-    return render_template("screens/editrecipe.html", recipeName=recipeInfo[0], recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=recipeInfo[4], recipeTag=recipeInfo[5], recipePermission=recipePermission, recipeImageUrl=recipeInfo[7], formAction=url_for("editRecipe",recipeID=recipeID),recipeID=recipeID, ingredientInfo=ingredientInfo, editableTitle=True)
+    print("msg", msg)
+    return render_template("screens/editrecipe.html", recipeName=recipeInfo[0], recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=recipeInfo[4], recipeTag=recipeInfo[5], recipePermission=recipePermission, recipeImageUrl=recipeInfo[7], formAction=url_for("editRecipe",recipeID=recipeID),recipeID=recipeID, ingredientInfo=ingredientInfo, editableTitle=True, formInTemplate=True,  validationMessage=msg)
 
 @app.route('/groceries', methods=['GET', 'POST'])
 def groceries():
+    if 'loggedin' not in session:
+        return redirect("/", code=302)
     cur = mysql.connection.cursor()
     user=session['userID']
     if request.method == 'POST':
@@ -306,18 +343,29 @@ def groceries():
 
 @app.route('/profile', methods=['GET','POST'])
 def profile():
+    if 'loggedin' not in session:
+        return redirect("/", code=302)
+    msg=''
     user=session['userID']
     if request.method == 'POST':
         update_cur = mysql.connection.cursor()
         # Getting profile information from the frontend
-        name = request.form.get('name')
-        email = request.form.get('email')
-        update_cur.execute("UPDATE Zesty.Users SET fullName=%s, email=%s where userID=%s", [name, email, user])
-        mysql.connection.commit()
+        name = request.form.get('name', '')
+        email = request.form.get('email', '')
+        if name=="":
+            msg="Please enter in a valid name"
+        elif email=="":
+            msg="Please enter in a valid email"
+        else:
+            try:
+                update_cur.execute("UPDATE Zesty.Users SET fullName=%s, email=%s where userID=%s", [name, email, user])
+                mysql.connection.commit()
+            except MySQLdb.Error:
+                msg = 'This email is already in use.  Please use another.'
     cur = mysql.connection.cursor()
     cur.execute('SELECT fullName, email FROM Zesty.Users where userID=%s', [user])
     profileInfo = cur.fetchone()
-    return render_template("screens/profile.html", name=profileInfo[0], email=profileInfo[1], recipeName="Profile", formAction="/profile")
+    return render_template("screens/profile.html", name=profileInfo[0], email=profileInfo[1], recipeName="Profile", formAction="/profile", formInTemplate=True, validationMessage=msg)
 
 if __name__ == '__main__':
     app.run(use_reloader=True, debug=True)

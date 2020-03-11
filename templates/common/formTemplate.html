@@ -1,8 +1,8 @@
-
+{% if formInTemplate %}
 <form method='POST' id="formSubmit" action="{{formAction}}" enctype="multipart/form-data">
-    {% block form %}{% endblock %}
+    {% block formContent %}{% endblock %} </form>
 
-</form>
+{% else %}
+{% block noFormContent %}{% endblock %}
 
-
-
+{% endif %}

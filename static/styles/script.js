@@ -1,7 +1,7 @@
 function deleteConfirm() {
-  if (confirm("Are you sure you want to delete the recipe {{recipeName|safe}}?")) {
+  if (confirm("Are you sure you want to delete the recipe?")) {
     document.getElementById("deleteRecipe").value = "1";
-    addEditRecipeForm.submit();
+    formSubmit.submit();
   }
   else {
     document.getElementById("deleteRecipe").value = "0";

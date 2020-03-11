@@ -134,7 +134,7 @@ p {
   padding: 2rem;
   border-radius: 5rem;
   background-color:white;
-  min-height:50rem;
+  min-height:30rem;
 }
 
 .validation-msg {
@@ -187,6 +187,11 @@ label{
   background-color:white;
   line-height: 3rem;
   padding:0rem 0.75rem;
+}
+
+.required:after {
+  content: "*";
+  color: rgb(191, 0, 0);
 }
 
 .custom-control-input:checked~.custom-control-label::before{
