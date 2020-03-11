@@ -27,7 +27,7 @@ CREATE TABLE `RecipeIngredients` (
   `ingredientID` int(11) NOT NULL AUTO_INCREMENT,
   `recipeID` int(11) NOT NULL,
   `ingredientDescription` varchar(128) DEFAULT NULL,
-  `ingredientAmount` int(11) NOT NULL,
+  `ingredientAmount` varchar(255) DEFAULT NULL,
   `ingredientUnit` varchar(128) NOT NULL,
   PRIMARY KEY (`ingredientID`),
   KEY `fk_recipeID` (`recipeID`),

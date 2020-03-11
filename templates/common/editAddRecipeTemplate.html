@@ -30,7 +30,7 @@
             value="{{recipeTag}}" />
         <label>Yield</label>
         <input type="text" class="form-control" name="recipeYield"
-            placeholder="Type in how many people this recipe is good for" value="{{recipeYield}}" />
+            placeholder="Type in how much this recipe makes (ex. 2 dozen cookies)" value="{{recipeYield}}" />
 
         <label class="required">Methods</label>
         <textarea class="form-control" name="recipeMethods" rows="13" cols="60"
@@ -54,7 +54,7 @@
                     placeholder="Type in an ingredient amount" value="{{ingredient[1]}}" />
                 <label>Ingredient Unit</label><br>
                 <select class="selectpicker" data-live-search="true" name="ingredientUnit" id="ingredientUnit">
-                    <option data-tokens="none" value="none" {% if ingredient[2] == 'none' %} selected {% endif %}>
+                    <option data-tokens="none" value="" {% if ingredient[2] == '' %} selected {% endif %}>
                     </option>></option>
                     <option data-tokens="teaspoon" value="teaspoon" {% if ingredient[2] == 'teaspoon' %} selected
                         {% endif %}>Teaspoon</option>
