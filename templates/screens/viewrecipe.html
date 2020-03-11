@@ -1,8 +1,5 @@
 {% extends './common/pageTemplate.html' %}
-
 {% block content %}
-
-
     <div>
         {% if isMine %}
         <a class="btn" type="submit" style="float:right" data-toggle="tooltip" data-placement="bottom"
@@ -41,7 +38,7 @@
             <p>
                 {{recipeYield}}
             </p>
-            <h5 class="recipeCard" style='background-image: url({{recipeImage}});'></h5>
+            <h5 class="recipe-card-unclickable" style='background-image: url({{recipeImage}});'></h5>
 
             <h5>
                 Methods:

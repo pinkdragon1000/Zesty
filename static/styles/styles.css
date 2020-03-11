@@ -211,11 +211,11 @@ textarea{
   }
 
 /* Your Recipes Screen Styles*/
-.recipeBox{
+.recipe-box{
   margin-top:2rem;
 }
 
-.recipeCard{
+.recipe-card{
   background-color: #C4C4C4;
   color: white;
   padding: 6rem;
@@ -231,13 +231,29 @@ textarea{
   z-index:1;
 }
 
-.recipeCard:hover {
+.recipe-card:hover {
   color: white;
   box-shadow: 0rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.16), 0rem 0.125rem 0.625rem 0rem rgba(0, 0, 0, 0.12);
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.recipeText {
+.recipe-card-unclickable{
+  background-color: #C4C4C4;
+  color: white;
+  padding: 6rem;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom:1rem;
+  margin-right:1rem;
+  min-width:22rem;
+  min-height: 10rem;
+  text-align:center;
+  border-radius:1rem 5rem;
+  background-size: 25rem;
+  z-index:1;
+}
+
+.recipe-text {
   position: inherit;
   background: linear-gradient(45deg, rgba(0, 188, 174, 0.75), rgb(0, 143, 173, 0.75));
   color: white;

@@ -1,12 +1,6 @@
 {% extends './common/pageTemplate.html' %}
-
 {% block content %}
-
-<a class="btn" type="submit" style="float:right"
-    onclick="javascript: formSubmit.submit();return false;" href="">Save Recipe</a>
-<a class="icon-btn delete fa fa-trash fa-2x" type="submit" style="float:right" data-toggle="tooltip"
-    data-placement="bottom" title="Delete Recipe" onclick="javascript: deleteConfirm(); return false;" href=""></a>
-
+<a class="btn" type="submit" style="float:right" onclick="javascript: formSubmit.submit();return false;" href="">Save Recipe</a>
+<a class="icon-btn delete fa fa-trash fa-2x" type="submit" style="float:right" data-toggle="tooltip" data-placement="bottom" title="Delete Recipe" onclick="javascript: deleteConfirm(); return false;" href=""></a>
 {% include './common/editAddRecipeTemplate.html' %}
-
 {% endblock %}

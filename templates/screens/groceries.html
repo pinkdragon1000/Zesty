@@ -1,7 +1,5 @@
 {% extends './common/pageTemplate.html' %}
-
 {% block content %}
-
 <a class="btn white-text" type="submit" style="float:right" onclick="javascript: groceryList.submit();return false;" href="">Clear Groceries</a>
 <br><br>
 <form id="groceryList" method='POST'>
@@ -15,5 +13,4 @@
     </span>
     {% endfor %}
   </form>
-
 {% endblock %}

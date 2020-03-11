@@ -1,7 +1,5 @@
 {% extends './common/pageTemplate.html' %}
-
 {% block content %}
-
     <div class="content col-md-6 padding">
         {% if validationMessage != "" %}
         <div class="validation-msg">{{ validationMessage }}</div>
@@ -17,5 +15,4 @@
         <br>
         <a class="btn" type="submit" onclick="javascript: formSubmit.submit();return false;" href="">Update</a>
     </div>
-
 {% endblock %}

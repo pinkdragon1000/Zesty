@@ -1,5 +1,4 @@
 {% extends './common/pageTemplate.html' %}
-
 {% block content %}
 <div class="row">
   <div class="col-md-8">
@@ -24,13 +23,11 @@
     </div>
   </form>
 </div>
-
-
-<div class="recipeBox">
+<div class="recipe-box">
       {% for recipe in recipeCard %}
-      <a class="recipeCard" id="recipe" href="{{url_for('viewRecipe', recipeID=recipe[0] )}}"
+      <a class="recipe-card" id="recipe" href="{{url_for('viewRecipe', recipeID=recipe[0] )}}"
         style='background-image: url({{recipe[2]}});'>
-        <span class="recipeText">{{ recipe[1] }}</span>
+        <span class="recipe-text">{{ recipe[1] }}</span>
       </a>
     
       {% endfor %}
