@@ -101,6 +101,10 @@ def signup():
             cursor.execute('INSERT INTO Zesty.Users (fullName, email, password) VALUES (%s, %s, %s)', (fullName, email, password))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
+            cursor.execute('SELECT * FROM Zesty.Users WHERE email = %s AND password = %s', (email, password))
+            account = cursor.fetchone()
+            session['loggedin'] = True
+            session['userID'] = account['userID']
             return redirect(url_for('yourRecipes'))
     # Show registration form with message (if any)
     return render_template('screens/signup.html', validationMessage=msg, pageName="Sign Up", formAction="/signup", path=request.path)
