@@ -124,9 +124,9 @@ def yourRecipes():
     if search != "":
         searchQuery = '%' + search + '%'
         if showPublic:
-            cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where (userID=%s or ispublic=1) and recipeName like %s', [user,searchQuery])
+            cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where (userID=%s or ispublic=1) and recipeName or recipeTag like %s', [user,searchQuery])
         else:
-            cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where (userID=%s) and recipeName like %s', [user,searchQuery])
+            cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where (userID=%s) and recipeName or recipeTag like %s', [user,searchQuery])
     # If a search query is not typed in
     else:
         if showPublic:
