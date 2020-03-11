@@ -48,8 +48,7 @@
 
         {% for ingredient in ingredientInfo %}
         <div id="ingredientBox">
-            <div id="ingredients"
-                style="border:#ccc 0.1rem solid; padding:1rem; border-radius:3rem; margin-bottom:1rem;">
+            <div id="ingredients" class="ingredients">
                 <label>Ingredient Amount</label>
                 <input type="text" class="form-control" name="ingredientAmount" id="ingredientAmount"
                     placeholder="Type in an ingredient amount" value="{{ingredient[1]}}" />

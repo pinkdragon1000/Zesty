@@ -1,6 +1,3 @@
-
-
-
 #!/usr/bin/python3
 from flask import Flask, request,jsonify, render_template, send_from_directory,session,redirect,url_for
 import os
@@ -144,7 +141,7 @@ def yourRecipes():
         else:
             cur.execute('SELECT recipeID, recipeName, recipeImage FROM Zesty.RecipeInfo where userID=%s', [user])
     recipes=cur.fetchall()
-    return render_template("screens/yourrecipes.html", recipeCard=recipes, recipeName=name[0]+"'s Recipes", search=search, showPublic="checked" if showPublic else "", formAction="/yourRecipes")
+    return render_template("screens/yourrecipes.html", recipeCard=recipes, pageName=name[0]+"'s Recipes", search=search, showPublic="checked" if showPublic else "", formAction="/yourRecipes")
 
 
 @app.route('/viewRecipe', methods=['GET', 'POST'])
@@ -188,7 +185,7 @@ def viewRecipe():
     # Making sure there is at least one ingredient box with recipeDescription, recipeAmount, and recipeUnit
     if len(ingredientInfo) == 0:
         ingredientInfo = [['','','']]  
-    return render_template("screens/viewrecipe.html", recipeName=recipeInfo[0],recipeID=recipeID, recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=methodSplit, recipeTag=recipeInfo[5], recipeImage=recipeInfo[6], ingredientInfo=ingredientInfo, formAction=url_for("viewRecipe",recipeID=recipeID), inGroceries=inGroceries, isMine=isMine)
+    return render_template("screens/viewrecipe.html", pageName=recipeInfo[0],recipeID=recipeID, recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=methodSplit, recipeTag=recipeInfo[5], recipeImage=recipeInfo[6], ingredientInfo=ingredientInfo, formAction=url_for("viewRecipe",recipeID=recipeID), inGroceries=inGroceries, isMine=isMine)
 
 #Upload folder for images
 UPLOAD_FOLDER = 'static/styles/recipeimages/'
@@ -260,7 +257,7 @@ def addRecipe():
             for (amount, unit, name) in zip(ingredientAmounts,ingredientUnits,ingredientNames):
                 cur.execute("INSERT INTO Zesty.RecipeIngredients (recipeID, ingredientDescription, ingredientAmount, ingredientUnit) values (%s, %s, %s, %s);",[recipeID,name,amount,unit])
             mysql.connection.commit()
-    return render_template("screens/addrecipe.html", formAction="/addRecipe", editableTitle=True, formInTemplate=True, validationMessage=msg, recipeName=recipeName, recipeDescription=recipeDescription, preparationTime=preparationTime, recipeYield=recipeYield, recipeMethods=recipeMethods, recipeTag=recipeTag, recipePermission=recipePermission, ingredientInfo=ingredientInfo)
+    return render_template("screens/addrecipe.html", formAction="/addRecipe", editableTitle=True, formInTemplate=True, validationMessage=msg, pageName=recipeName, recipeDescription=recipeDescription, preparationTime=preparationTime, recipeYield=recipeYield, recipeMethods=recipeMethods, recipeTag=recipeTag, recipePermission=recipePermission, ingredientInfo=ingredientInfo)
 
 @app.route('/editRecipe', methods=['GET', 'POST'])
 def editRecipe():
@@ -325,7 +322,7 @@ def editRecipe():
     ingredientInfo = [list(i) for i in ingredientInfo]
 
     print("msg", msg)
-    return render_template("screens/editrecipe.html", recipeName=recipeInfo[0], recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=recipeInfo[4], recipeTag=recipeInfo[5], recipePermission=recipePermission, recipeImageUrl=recipeInfo[7], formAction=url_for("editRecipe",recipeID=recipeID),recipeID=recipeID, ingredientInfo=ingredientInfo, editableTitle=True, formInTemplate=True,  validationMessage=msg)
+    return render_template("screens/editrecipe.html", pageName=recipeInfo[0], recipeDescription=recipeInfo[1], preparationTime=recipeInfo[2], recipeYield=recipeInfo[3], recipeMethods=recipeInfo[4], recipeTag=recipeInfo[5], recipePermission=recipePermission, recipeImageUrl=recipeInfo[7], formAction=url_for("editRecipe",recipeID=recipeID),recipeID=recipeID, ingredientInfo=ingredientInfo, editableTitle=True, formInTemplate=True,  validationMessage=msg)
 
 @app.route('/groceries', methods=['GET', 'POST'])
 def groceries():
@@ -338,7 +335,7 @@ def groceries():
         mysql.connection.commit()
     cur.execute('SELECT DISTINCT ingredientDescription from Zesty.RecipeIngredients join Zesty.GroceryList on RecipeIngredients.recipeID=GroceryList.recipeID and userID=%s ORDER BY ingredientDescription', [user])
     groceryListIngredients=cur.fetchall()
-    return render_template("screens/groceries.html", recipeName="Groceries", groceryListIngredients=groceryListIngredients)
+    return render_template("screens/groceries.html", pageName="Groceries", groceryListIngredients=groceryListIngredients)
 
 
 @app.route('/profile', methods=['GET','POST'])
@@ -365,7 +362,7 @@ def profile():
     cur = mysql.connection.cursor()
     cur.execute('SELECT fullName, email FROM Zesty.Users where userID=%s', [user])
     profileInfo = cur.fetchone()
-    return render_template("screens/profile.html", name=profileInfo[0], email=profileInfo[1], recipeName="Profile", formAction="/profile", formInTemplate=True, validationMessage=msg)
+    return render_template("screens/profile.html", name=profileInfo[0], email=profileInfo[1], pageName="Profile", formAction="/profile", formInTemplate=True, validationMessage=msg)
 
 if __name__ == '__main__':
     app.run(use_reloader=True, debug=True)

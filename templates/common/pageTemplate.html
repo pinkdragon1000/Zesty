@@ -6,31 +6,28 @@
 
 <body>
   {% extends './common/formTemplate.html'%}
-
- 
   {% block formContent %}
   {% block noFormContent %}
 
-    <div>
-      {% include './common/navbarTemplate.html' %}
-      {% block title %}
-      {% if editableTitle %}
-      <input type="text" class="page-name" name="recipeName" placeholder="Type in a recipe name here...*"
-        value="{{recipeName}}">
-      {% else %}
-      <input type="text" class="page-name uneditable" value="{{recipeName}}"
-      disabled>
-      {% endif %}
-      {% endblock %}
-    </div>
-    <div class="content">
-      {% block content %}{% endblock %}
-    </div>
+  <div>
+    {% include './common/navbarTemplate.html' %}
+    {% block title %}
+    {% if editableTitle %}
+    <input type="text" class="page-name" name="recipeName" placeholder="Type in a recipe name here...*"
+      value="{{pageName}}">
+    {% else %}
+    <input type="text" class="page-name uneditable" value="{{pageName}}" disabled>
+    {% endif %}
+    {% endblock %}
+  </div>
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
 
   {% include './common/modalHelpTemplate.html'%}
   {% block modal %}{% endblock %}
-  
-  {% endblock %} 
+
+  {% endblock %}
 
   {% endblock %}
 </body>
