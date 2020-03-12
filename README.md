@@ -6,8 +6,9 @@
 
 Hosted on a Google Cloud VM instance running using Debian and a g1-small (1 vCPU, 1.7 GB memory) machine type.
 
-![/static/styles/Screenshot1.png](/static/styles/Screenshot1.png)
-![/static/styles/Screenshot1.png](/static/styles/Screenshot2.png)
+![](/static/styles/Screenshot1.png)
+![](/static/styles/Screenshot2.png)
+![](/static/styles/Screenshot3.png)
 
 **Viewing the Application**
 
