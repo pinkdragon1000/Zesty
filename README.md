@@ -10,10 +10,6 @@ Hosted on a Google Cloud VM instance running using Debian and a g1-small (1 vCPU
 ![](/static/styles/Screenshot2.png)
 ![](/static/styles/Screenshot3.png)
 
-**Viewing the Application**
-
-http://35.225.209.228:5000
-
 **Running the Program Locally**
 
 * Follow the instructions here to create a virtual environment: https://flask.palletsprojects.com/en/1.1.x/installation/
